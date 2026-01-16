@@ -1,0 +1,161 @@
+### Arquivo de testes da API
+### Use a extensão REST Client no VSCode ou copie para Postman/Insomnia
+
+### ========================================
+### HEALTH CHECK
+### ========================================
+
+### 1. Testar se API está funcionando
+GET http://localhost:5000/api/health
+
+### ========================================
+### AUTENTICAÇÃO - CADASTRO
+### ========================================
+
+### 2. Cadastrar novo usuário (ENEM)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao@example.com",
+  "password": "senha123",
+  "vestibular": "enem"
+}
+
+### 3. Cadastrar usuário (FUVEST)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Maria Santos",
+  "email": "maria@example.com",
+  "password": "senha123",
+  "vestibular": "fuvest"
+}
+
+### 4. Cadastrar usuário (UNICAMP)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Pedro Oliveira",
+  "email": "pedro@example.com",
+  "password": "senha123",
+  "vestibular": "unicamp"
+}
+
+### ========================================
+### AUTENTICAÇÃO - LOGIN
+### ========================================
+
+### 5. Login com sucesso
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao@example.com",
+  "password": "senha123"
+}
+
+### 6. Login com senha incorreta (deve falhar)
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao@example.com",
+  "password": "senhaerrada"
+}
+
+### 7. Login com email inexistente (deve falhar)
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "naoexiste@example.com",
+  "password": "senha123"
+}
+
+### ========================================
+### ROTAS PROTEGIDAS
+### ========================================
+
+### 8. Obter dados do usuário logado
+### IMPORTANTE: Substitua SEU_TOKEN_AQUI pelo token recebido no login
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer SEU_TOKEN_AQUI
+
+### ========================================
+### TESTES DE VALIDAÇÃO
+### ========================================
+
+### 9. Cadastro sem nome (deve falhar)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "teste@example.com",
+  "password": "senha123",
+  "vestibular": "enem"
+}
+
+### 10. Cadastro com email inválido (deve falhar)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste",
+  "email": "emailinvalido",
+  "password": "senha123",
+  "vestibular": "enem"
+}
+
+### 11. Cadastro com senha curta (deve falhar)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste",
+  "email": "teste2@example.com",
+  "password": "123",
+  "vestibular": "enem"
+}
+
+### 12. Cadastro com email duplicado (deve falhar)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Outro João",
+  "email": "joao@example.com",
+  "password": "senha123",
+  "vestibular": "enem"
+}
+
+### ========================================
+### EXEMPLO COMPLETO DE FLUXO
+### ========================================
+
+### 13. PASSO 1: Cadastrar usuário completo
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Ana Carolina",
+  "email": "ana@example.com",
+  "password": "SenhaForte123",
+  "vestibular": "enem"
+}
+
+### 14. PASSO 2: Fazer login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ana@example.com",
+  "password": "SenhaForte123"
+}
+
+### 15. PASSO 3: Acessar dados (cole o token do passo 2)
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer COLE_O_TOKEN_AQUI
