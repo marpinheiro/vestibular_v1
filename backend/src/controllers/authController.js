@@ -57,13 +57,14 @@ exports.register = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Usuário cadastrado com sucesso',
+      message: 'Usuário cadastrado com sucesso! Plano gratuito ativado.',
       data: {
         user: {
           id: user.id,
           name: user.name,
           email: user.email,
           vestibular: user.vestibular,
+          current_plan_id: 1, // Sempre gratuito para novos usuários
         },
         token,
       },

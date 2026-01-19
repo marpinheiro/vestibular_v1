@@ -1,3 +1,4 @@
+//backend/server.js
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -27,14 +28,57 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-// Rotas
+// Rotas de Autenticação
 console.log('📌 Carregando rotas de autenticação...');
 try {
   const authRoutes = require('./src/routes/authRoutes');
   app.use('/api/auth', authRoutes);
   console.log('✅ Rotas de autenticação carregadas');
 } catch (error) {
-  console.error('❌ Erro ao carregar rotas:', error.message);
+  console.error('❌ Erro ao carregar rotas de autenticação:', error.message);
+}
+
+// Rotas de Redações
+console.log('📌 Carregando rotas de redações...');
+try {
+  const redacaoRoutes = require('./src/routes/redacaoRoutes');
+  app.use('/api/redacoes', redacaoRoutes);
+  console.log('✅ Rotas de redações carregadas');
+} catch (error) {
+  console.error('❌ Erro ao carregar rotas de redações:', error.message);
+}
+
+// Rotas de Questões
+console.log('📌 Carregando rotas de questões...');
+try {
+  const questionRoutes = require('./src/routes/questionRoutes');
+  app.use('/api/questions', questionRoutes);
+  console.log('✅ Rotas de questões carregadas');
+} catch (error) {
+  console.error('❌ Erro ao carregar rotas de questões:', error.message);
+}
+
+// Rotas de Progresso
+console.log('📌 Carregando rotas de progresso...');
+try {
+  const progressoRoutes = require('./src/routes/progressoRoutes');
+  app.use('/api/progresso', progressoRoutes);
+  console.log('✅ Rotas de progresso carregadas');
+} catch (error) {
+  console.error('❌ Erro ao carregar rotas de progresso:', error.message);
+}
+
+// 🆕 ROTAS DE PLANO DE ESTUDOS
+console.log('📌 Carregando rotas de plano de estudos...');
+try {
+  const planoEstudosRoutes = require('./src/routes/planoEstudosRoutes');
+  app.use('/api/plano-estudos', planoEstudosRoutes);
+  console.log('✅ Rotas de plano de estudos carregadas');
+} catch (error) {
+  console.error(
+    '❌ Erro ao carregar rotas de plano de estudos:',
+    error.message,
+  );
 }
 
 // Rota de teste
@@ -79,7 +123,7 @@ const startServer = async () => {
     app.listen(PORT, () => {
       console.log('========================================');
       console.log(`🚀 Servidor rodando na porta ${PORT}`);
-      console.log(`📍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`🔧 Ambiente: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🌐 URL: http://localhost:${PORT}`);
       console.log('========================================');
     });

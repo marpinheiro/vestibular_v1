@@ -1,3 +1,4 @@
+//backend/src/config/database.js
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
@@ -26,4 +27,5 @@ const testConnection = async () => {
   }
 };
 
+// Exportar como estava antes (mantém compatibilidade)
 module.exports = { pool, testConnection };

@@ -1,11 +1,14 @@
+// ============================================
+// backend/src/middleware/auth.js (se não tiver)
+// ============================================
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Middleware para proteger rotas
 exports.protect = async (req, res, next) => {
   let token;
 
-  // Verificar se o token está no header
+  // Verificar se o token existe no header
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -13,16 +16,16 @@ exports.protect = async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  // Verificar se o token existe
+  // Se não houver token
   if (!token) {
     return res.status(401).json({
       success: false,
-      message: 'Acesso não autorizado. Token não fornecido.',
+      message: 'Não autorizado - Token não fornecido',
     });
   }
 
   try {
-    // Verificar e decodificar token
+    // Verificar token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Buscar usuário
@@ -39,7 +42,7 @@ exports.protect = async (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       success: false,
-      message: 'Token inválido ou expirado',
+      message: 'Não autorizado - Token inválido',
     });
   }
 };

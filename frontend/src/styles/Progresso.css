@@ -1,0 +1,88 @@
+/* Progresso.css */
+
+.progresso-page {
+  padding: 20px;
+}
+
+.page-subtitle {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.progresso-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.progresso-cards .card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.progresso-cards .card h4 {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.progresso-cards .card span {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.progresso-section {
+  margin-top: 40px;
+}
+
+.evolucao-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.evolucao-table th,
+.evolucao-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.materias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.materia-card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.materia-barra {
+  height: 8px;
+  background: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.materia-fill {
+  height: 100%;
+  background: #4caf50;
+}
+
+.dificuldade-list {
+  margin-top: 10px;
+}
+
+.dificuldade-list li {
+  margin-bottom: 6px;
+}

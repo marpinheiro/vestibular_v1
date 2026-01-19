@@ -13,6 +13,16 @@ const LandingPage = () => {
     navigate('/cadastro');
   };
 
+  const handlePlanClick = () => {
+    // Verificar se está logado
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/dashboard'); // Se logado, vai para dashboard
+    } else {
+      navigate('/login'); // Se não, pede para fazer login
+    }
+  };
+
   return (
     <div className="landing-page">
       {/* Header/Navbar */}
@@ -214,7 +224,7 @@ const LandingPage = () => {
                 <li>✓ 1 redação por mês</li>
                 <li>✓ Acompanhamento básico</li>
               </ul>
-              <button className="btn-plan" onClick={handleSignupClick}>
+              <button className="btn-plan" onClick={handlePlanClick}>
                 Começar Grátis
               </button>
             </div>
@@ -234,7 +244,7 @@ const LandingPage = () => {
                 <li>✓ Análise detalhada</li>
                 <li>✓ Suporte prioritário</li>
               </ul>
-              <button className="btn-plan primary" onClick={handleSignupClick}>
+              <button className="btn-plan primary" onClick={handlePlanClick}>
                 Assinar Agora
               </button>
             </div>
@@ -253,7 +263,7 @@ const LandingPage = () => {
                 <li>✓ Material exclusivo</li>
                 <li>✓ Garantia de 30 dias</li>
               </ul>
-              <button className="btn-plan" onClick={handleSignupClick}>
+              <button className="btn-plan" onClick={handlePlanClick}>
                 Assinar Anual
               </button>
             </div>
