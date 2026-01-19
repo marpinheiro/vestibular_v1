@@ -7,6 +7,7 @@ import Redacoes from './Redacoes';
 import Simulados from './Simulados';
 import Progresso from './Progresso';
 import Configuracoes from './Configuracoes';
+import Checkout from './Checkout';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -49,6 +50,8 @@ const Dashboard = () => {
         return <Simulados />;
       case 'progresso':
         return <Progresso />;
+      case 'checkout':
+        return <Checkout />;
       case 'configuracoes':
         return <Configuracoes />;
       default:
@@ -134,7 +137,7 @@ const Dashboard = () => {
           {!isPremium && (
             <button
               className="nav-item upgrade-btn"
-              onClick={() => setActiveTab('upgrade')}
+              onClick={() => setActiveTab('checkout')}
             >
               <span className="nav-icon">⭐</span>
               <span className="nav-text">Assinar Premium</span>
@@ -242,9 +245,9 @@ const HomeContent = ({ user, isPremium, setActiveTab, stats }) => {
             </ul>
             <button
               className="btn-upgrade"
-              onClick={() => setActiveTab('upgrade')}
+              onClick={() => setActiveTab('checkout')}
             >
-              Assinar Premium - R$ 49,90/mês
+              Assinar Premium - R$ 29,90/mês
             </button>
           </div>
         </div>

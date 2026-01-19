@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const { testConnection } = require('./src/config/database');
 const simuladosRoutes = require('./src/routes/simuladosRoutes');
+const paymentRoutes = require('./src/routes/paymentRoutes');
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -75,6 +76,16 @@ try {
   console.log('✅ Rotas de progresso carregadas');
 } catch (error) {
   console.error('❌ Erro ao carregar rotas de progresso:', error.message);
+}
+
+// 🆕 ROTAS DE PLANO
+console.log('📌 Carregando rotas de Assinaturas...');
+try {
+  const paymentRoutes = require('./src/routes/paymentRoutes');
+  app.use('/api/payment', paymentRoutes);
+  console.log('✅ Rotas de assinaturas carregadas');
+} catch (error) {
+  console.error('❌ Erro ao carregar rotas de assinaturas:', error.message);
 }
 
 // 🆕 ROTAS DE PLANO DE ESTUDOS
