@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { testConnection } = require('./src/config/database');
+const simuladosRoutes = require('./src/routes/simuladosRoutes');
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -46,6 +47,14 @@ try {
   console.log('✅ Rotas de redações carregadas');
 } catch (error) {
   console.error('❌ Erro ao carregar rotas de redações:', error.message);
+}
+// Rotas Simulados
+console.log('📌 Carregando rotas de simulados...');
+try {
+  app.use('/api/simulados', simuladosRoutes);
+  console.log('✅ Rotas de simulados carregadas');
+} catch (error) {
+  console.error('❌ Erro ao carregar rotas de simulados:', error.message);
 }
 
 // Rotas de Questões
