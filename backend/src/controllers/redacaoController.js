@@ -34,10 +34,22 @@ exports.enviarRedacao = async (req, res) => {
 
     // Verificar limites por plano
     const user = await User.findById(userId);
-    const isPremium = user.current_plan_id > 1;
+
+    console.log('👤 Usuário ao enviar redação:', {
+      id: user.id,
+      subscription_status: user.subscription_status,
+      current_plan_id: user.current_plan_id,
+    });
+
+    // ✅ VERIFICAÇÃO CORRETA DE PREMIUM
+    const isPremium =
+      user.subscription_status === 'premium' || user.current_plan_id > 1;
+    console.log('⭐ É premium?', isPremium);
 
     if (!isPremium) {
       const redacoesNoMes = await Redacao.countThisMonth(userId);
+      console.log('📊 Redações no mês:', redacoesNoMes);
+
       if (redacoesNoMes >= 1) {
         return res.status(403).json({
           success: false,

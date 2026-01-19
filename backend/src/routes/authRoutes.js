@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, getMe } = require('../controllers/authController');
+const authController = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
 // Rotas públicas
-router.post('/register', register);
-router.post('/login', login);
+router.post('/register', authController.register);
+router.post('/login', authController.login);
 
-// Rotas protegidas
-router.get('/me', protect, getMe);
+// ✅ Rota protegida - Retorna dados atualizados do usuário
+router.get('/me', protect, authController.getMe);
 
 module.exports = router;

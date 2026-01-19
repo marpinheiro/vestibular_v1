@@ -16,7 +16,15 @@ const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [stats, setStats] = useState({ questoes: 0, redacoes: 0 });
 
-  const isPremium = user?.current_plan_id > 1;
+  // ✅ VERIFICAÇÃO CORRETA DE PREMIUM
+  const isPremium =
+    user?.subscription_status === 'premium' || user?.current_plan_id > 1;
+
+  console.log('🔍 Dashboard - Status do usuário:', {
+    subscription_status: user?.subscription_status,
+    current_plan_id: user?.current_plan_id,
+    isPremium: isPremium,
+  });
 
   // Carregar estatísticas ao montar
   useEffect(() => {
@@ -72,7 +80,6 @@ const Dashboard = () => {
       <aside className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
           <div className="logo">
-            {/* Se sidebarOpen for verdadeiro mostra o nome completo, senão mostra SA */}
             <h1>{sidebarOpen ? 'SempreAprender' : 'SA'}</h1>
           </div>
           <button
@@ -188,9 +195,23 @@ const HomeContent = ({ user, isPremium, setActiveTab, stats }) => {
       <div className="welcome-section">
         <h2>Bem-vindo(a), {user?.name}! 🎓</h2>
         <p>Vamos começar seus estudos hoje?</p>
+
+        {/* ✅ MENSAGEM DIFERENTE PARA PREMIUM */}
         {!isPremium && stats.questoes > 0 && (
           <div className="usage-info">
             📊 Você já respondeu {stats.questoes} questões este mês (limite: 50)
+          </div>
+        )}
+        {isPremium && (
+          <div
+            className="usage-info"
+            style={{
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: 'white',
+              border: 'none',
+            }}
+          >
+            ⭐ Plano Premium Ativo - Questões e Simulados Ilimitados!
           </div>
         )}
       </div>
@@ -229,6 +250,7 @@ const HomeContent = ({ user, isPremium, setActiveTab, stats }) => {
         </div>
       </div>
 
+      {/* ✅ BANNER SÓ PARA NÃO-PREMIUM */}
       {!isPremium && (
         <div className="upgrade-banner">
           <div className="upgrade-content">

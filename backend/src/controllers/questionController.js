@@ -92,9 +92,16 @@ exports.responderQuestao = async (req, res) => {
 
     // Verificar limite por plano
     const user = await User.findById(userId);
-    console.log('👤 Usuário:', { id: user.id, plan: user.current_plan_id });
+    console.log('👤 Usuário:', {
+      id: user.id,
+      subscription_status: user.subscription_status,
+      current_plan_id: user.current_plan_id,
+    });
 
-    const isPremium = user.current_plan_id > 1;
+    // ✅ VERIFICAÇÃO CORRETA DE PREMIUM
+    const isPremium =
+      user.subscription_status === 'premium' || user.current_plan_id > 1;
+    console.log('⭐ É premium?', isPremium);
 
     if (!isPremium) {
       const questoesNoMes = await UserAnswer.countThisMonth(userId);
