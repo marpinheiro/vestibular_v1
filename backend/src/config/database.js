@@ -12,6 +12,11 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  ssl: {
+    // <--- ADICIONE DAQUI
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true,
+  }, // <--- ATÉ AQUI
 });
 
 // Testar conexão
